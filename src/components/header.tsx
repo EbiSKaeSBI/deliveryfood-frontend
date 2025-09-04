@@ -1,4 +1,5 @@
 import logoDelivery from '../assets/svg/logo.svg'
+import Button from "./ui/button/button.tsx";
 
 const Header = () => {
   const isUserLogin: boolean = false
@@ -15,23 +16,20 @@ const Header = () => {
           placeholder="Адрес доставки"
         />
       </label>
-      <div className="buttons">
+      <div className="flex items-center">
         {isUserLogin && <span className="user-name"></span>}
-        <button className="button button-primary button-auth">
-          <span className="button-auth-svg"></span>
-          <span className="button-text">Войти</span>
-        </button>
+          <Button className="bg-[#1890ff] border-[#1890ff] text-white mr-[10px] hover:bg-white hover:border-[#d9d9d9] hover:text-[#595959] hover:duration-250">
+              Войти
+          </Button>
         {isUserLogin && (
-          <button className="button button-cart">
-            <span className="button-cart-svg"></span>
-            <span className="button-text">Корзина</span>
-          </button>
+            <Button className="mx-[5px]">
+                Корзина
+            </Button>
         )}
         {isUserLogin && (
-          <button className="button button-primary button-out">
-            <span className="button-text">Выйти</span>
-            <span className="button-out-svg"></span>
-          </button>
+          <Button className="mx-[5px] bg-[#1890ff] border-[#1890ff] text-white mr-[10px] hover:bg-white hover:border-[#d9d9d9] hover:text-[#595959] hover:duration-250">
+              Выйти
+          </Button>
         )}
       </div>
     </header>
