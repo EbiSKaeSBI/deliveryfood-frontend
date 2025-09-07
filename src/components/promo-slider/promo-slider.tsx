@@ -2,6 +2,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/shadcn/ui/carousel.tsx";
 import Promo from "@/components/promo-slider/components/promo.tsx";
 import Autoplay from "embla-carousel-autoplay";
@@ -50,6 +52,8 @@ const PromoSlider = () => {
           />
         </CarouselItem>
       </CarouselContent>
+      <CarouselNext />
+      <CarouselPrevious />
     </Carousel>
   );
 };
