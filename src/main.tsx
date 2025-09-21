@@ -5,13 +5,19 @@ import App from "./App.tsx";
 import Header from "./components/header/header.tsx";
 import { BrowserRouter } from "react-router-dom";
 import Footer from "@/components/footer/footer.tsx";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/shared/api/query-client.ts";
+import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <Header />
-      <App />
-      <Footer />
+      <QueryClientProvider client={queryClient}>
+        <Header />
+        <App />
+        <Toaster position="bottom-right" toastOptions={{ duration: 4000 }} />
+        <Footer />
+      </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>,
 );

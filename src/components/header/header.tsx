@@ -5,10 +5,10 @@ import { FaUser } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import Input from "../ui/input/input.tsx";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "@/stores/auth-stores.ts";
 
 const Header = () => {
-  const isUserLogin: boolean = false;
-
+  const { isAuthenticated, logout } = useAuthStore();
   return (
     <header className="flex items-center justify-between mb-10 container mx-auto">
       <Link to="/">
@@ -20,7 +20,7 @@ const Header = () => {
         placeholder="Адрес доставки"
       />
       <div className="flex items-center">
-        {!isUserLogin && (
+        {!isAuthenticated && (
           <Link to="/login">
             <Button className="bg-[#1890ff] border-[#1890ff] text-white mr-[10px] hover:bg-white hover:border-[#d9d9d9] hover:text-[#595959] hover:duration-250">
               <FaUser size={16} />
@@ -28,7 +28,7 @@ const Header = () => {
             </Button>
           </Link>
         )}
-        {isUserLogin && (
+        {isAuthenticated && (
           <>
             <Link to="/profile/#">
               <span className="mr-[20px] font-bold text-[18px]"></span>
@@ -38,7 +38,10 @@ const Header = () => {
                 <FaBasketShopping size={16} /> Корзина
               </Button>
             </Link>
-            <Button className="mx-[5px] bg-[#1890ff] border-[#1890ff] text-white mr-[10px] hover:bg-white hover:border-[#d9d9d9] hover:text-[#595959] hover:duration-250">
+            <Button
+              logout={logout}
+              className="mx-[5px] bg-[#1890ff] border-[#1890ff] text-white mr-[10px] hover:bg-white hover:border-[#d9d9d9] hover:text-[#595959] hover:duration-250"
+            >
               <IoMdExit size={16} />
               Выйти
             </Button>
