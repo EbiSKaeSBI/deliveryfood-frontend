@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 interface RestaurantCardProps {
   partners: {
+    id: string;
     name: string;
     timeOfDelivery: number;
     stars: number;
@@ -13,7 +14,7 @@ interface RestaurantCardProps {
 
 const RestaurantCard = ({ partners }: RestaurantCardProps) => {
   return (
-    <Link to="restaurant">
+    <Link to={`/product/${partners.id}`}>
       <div className="bg-white shadow-[0_4px_12px_rgba(0,0,0,0.05)] rounded-[7px] overflow-hidden mb-[30px] basis-[31%] no-underline mt-5">
         <img src={partners.image} className="w-full" alt="image" />
         <div className="pt-[20px] pr-[23px]  pl-[15px] min-h-[200px] flex flex-col">

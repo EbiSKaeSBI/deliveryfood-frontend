@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Main from "@/app/main/main.tsx";
-import Login from "@/app/auth/page/login/login.tsx";
-import Register from "@/app/auth/page/register/register.tsx";
+import Login from "@/app/auth/login/login.tsx";
+import Register from "@/app/auth/register/register.tsx";
+import Product from "@/app/product/product.tsx";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route path="/" element={<Main />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+        <Route path="/product/:id" element={<Product />} />
     </Routes>
   );
 }
