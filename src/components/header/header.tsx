@@ -41,7 +41,8 @@ const Header = () => {
         {isAuthenticated && (
           <>
             <Link to="/profile/#">
-              <span className="mr-[20px] font-bold text-[18px]">
+              <span className="mr-[20px] font-bold text-[18px] flex items-center gap-2">
+                  <FaUser size={16} />
                 {data?.name}
               </span>
             </Link>
