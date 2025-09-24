@@ -1,13 +1,14 @@
-import { AuthRequest } from "@/components/form/api/auth-request.ts";
+import { AuthRequest } from "@/shared/api/auth-request.ts";
 import type { User } from "@/types/users/users.ts";
 import type { AuthLogin, AuthRegister } from "@/types/auth/auth.ts";
-import { create } from "zustand/react";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { toast } from "react-hot-toast";
 
 interface AuthState {
   user: User | null;
   token: string | null;
+  refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
@@ -15,7 +16,7 @@ interface AuthState {
   login: (credentials: AuthLogin) => Promise<void>;
   register: (credentials: AuthRegister) => Promise<void>;
   logout: () => Promise<void>;
-  clearErrors: () => Promise<void>;
+  clearErrors: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -23,6 +24,7 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       token: null,
+      refreshToken: null,
       isAuthenticated: false,
       isLoading: false,
       error: null,
@@ -31,14 +33,18 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null });
 
         try {
-          const response: { user: User } = await AuthRequest.login(credentials);
+          const response = await AuthRequest.login(credentials);
+
           set({
             user: response.user,
-            token: response.token,
+            token: response.accessToken,
+            refreshToken: response.refreshToken,
             isAuthenticated: true,
             isLoading: false,
             error: null,
           });
+          localStorage.setItem("token", response.accessToken);
+          toast.success(response.message || "Успешный вход в систему!");
         } catch (error) {
           set({
             isLoading: false,
@@ -53,13 +59,17 @@ export const useAuthStore = create<AuthState>()(
 
         try {
           const response = await AuthRequest.register(userData);
+
           set({
             user: response.user,
-            token: response.token,
+            token: response.accessToken,
+            refreshToken: response.refreshToken,
             isAuthenticated: true,
             isLoading: false,
             error: null,
           });
+          localStorage.setItem("token", response.accessToken);
+          toast.success(response.message || "Успешная регистрация!");
         } catch (error) {
           set({
             isLoading: false,
@@ -69,16 +79,20 @@ export const useAuthStore = create<AuthState>()(
           throw error;
         }
       },
+
       logout: async () => {
         set({
           user: null,
           token: null,
+          refreshToken: null,
           isAuthenticated: false,
           error: null,
         });
+        localStorage.clear();
         toast.success("Вы вышли!");
       },
-      clearErrors: async () => {
+
+      clearErrors: () => {
         set({ error: null });
       },
     }),
@@ -87,6 +101,7 @@ export const useAuthStore = create<AuthState>()(
       partialize: (state) => ({
         user: state.user,
         token: state.token,
+        refreshToken: state.refreshToken,
         isAuthenticated: state.isAuthenticated,
       }),
     },

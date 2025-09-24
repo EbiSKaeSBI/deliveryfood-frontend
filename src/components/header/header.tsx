@@ -6,9 +6,19 @@ import { IoMdExit } from "react-icons/io";
 import Input from "../ui/input/input.tsx";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "@/stores/auth-stores.ts";
+import { useQuery } from "@tanstack/react-query";
+import type { User } from "@/types/users/users.ts";
+import { getProfile } from "@/shared/api/get-profile.ts";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuthStore();
+
+  const { data } = useQuery<User>({
+    queryKey: ["user"],
+    queryFn: getProfile,
+    enabled: isAuthenticated,
+  });
+
   return (
     <header className="flex items-center justify-between mb-10 container mx-auto">
       <Link to="/">
@@ -31,7 +41,9 @@ const Header = () => {
         {isAuthenticated && (
           <>
             <Link to="/profile/#">
-              <span className="mr-[20px] font-bold text-[18px]"></span>
+              <span className="mr-[20px] font-bold text-[18px]">
+                {data?.name}
+              </span>
             </Link>
             <Link to="/cart">
               <Button className="mx-[5px] hover:bg-[#1890ff] hover:text-white hover:duration-250">

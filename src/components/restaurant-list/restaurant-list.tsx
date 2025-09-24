@@ -1,14 +1,13 @@
 import RestaurantCard from "@/components/restaurant-list/components/restaurant-card.tsx";
-import {useQuery} from "@tanstack/react-query";
-import {getPartners} from "@/shared/api/get-partners.ts";
-import type {Partner} from "@/types/partners.ts";
+import { useQuery } from "@tanstack/react-query";
+import { getPartners } from "@/shared/api/get-partners.ts";
+import type { Partner } from "@/types/partners.ts";
 
 const RestaurantList = () => {
   const { data, error, isPending } = useQuery<Partner[]>({
     queryKey: ["restaurant"],
     queryFn: getPartners,
   });
-
 
   if (isPending) {
     return (
