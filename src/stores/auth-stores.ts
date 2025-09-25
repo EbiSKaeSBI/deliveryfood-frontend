@@ -7,9 +7,8 @@ import { toast } from "react-hot-toast";
 
 interface AuthState {
   user: User | null;
-  token: string | null;
-  refreshToken: string | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   isLoading: boolean;
   error: string | null;
 
@@ -26,6 +25,7 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       refreshToken: null,
       isAuthenticated: false,
+      isAdmin: false,
       isLoading: false,
       error: null,
 
@@ -34,15 +34,17 @@ export const useAuthStore = create<AuthState>()(
 
         try {
           const response = await AuthRequest.login(credentials);
+          const isAdmin = response.user.role === "ADMIN";
+            set({
+              user: response.user,
+              isAdmin: isAdmin,
+              isAuthenticated: true,
+              isLoading: false,
+              error: null,
+            });
 
-          set({
-            user: response.user,
-            token: response.accessToken,
-            refreshToken: response.refreshToken,
-            isAuthenticated: true,
-            isLoading: false,
-            error: null,
-          });
+
+
           localStorage.setItem("token", response.accessToken);
           toast.success(response.message || "Успешный вход в систему!");
         } catch (error) {
@@ -62,8 +64,6 @@ export const useAuthStore = create<AuthState>()(
 
           set({
             user: response.user,
-            token: response.accessToken,
-            refreshToken: response.refreshToken,
             isAuthenticated: true,
             isLoading: false,
             error: null,
@@ -83,9 +83,8 @@ export const useAuthStore = create<AuthState>()(
       logout: async () => {
         set({
           user: null,
-          token: null,
-          refreshToken: null,
           isAuthenticated: false,
+          isAdmin: false,
           error: null,
         });
         localStorage.clear();
@@ -100,9 +99,8 @@ export const useAuthStore = create<AuthState>()(
       name: "Auth Store",
       partialize: (state) => ({
         user: state.user,
-        token: state.token,
-        refreshToken: state.refreshToken,
         isAuthenticated: state.isAuthenticated,
+        isAdmin: state.isAdmin,
       }),
     },
   ),

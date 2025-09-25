@@ -1,8 +1,12 @@
 import PromoSlider from "@/components/promo-slider/promo-slider.tsx";
 import Input from "@/components/ui/input/input.tsx";
 import RestaurantList from "@/components/restaurant-list/restaurant-list.tsx";
+import {useState} from "react";
+
+
 
 const Main = () => {
+    const [query, setQuery] = useState<string>("")
   return (
     <>
       <PromoSlider />
@@ -13,9 +17,11 @@ const Main = () => {
         <Input
           className="w-[300px] bg-[url(@/assets/svg/search.svg)]"
           placeholder="Поиск блюд и ресторанов"
+          value={query}
+          setValue={setQuery}
         />
       </div>
-      <RestaurantList />
+      <RestaurantList query={query} />
     </>
   );
 };

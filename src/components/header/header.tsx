@@ -43,7 +43,7 @@ const Header = () => {
             <Link to="/profile/#">
               <span className="mr-[20px] font-bold text-[18px] flex items-center gap-2">
                   <FaUser size={16} />
-                {data?.name}
+                {data?.name || "Loading..."}
               </span>
             </Link>
             <Link to="/cart">
