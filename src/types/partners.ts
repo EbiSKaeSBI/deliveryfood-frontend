@@ -17,3 +17,17 @@ export interface Product {
   image: string;
   partnerId: string;
 }
+
+
+export type PartnersResponse = {
+  partners: Partner[];
+  pagination: {
+    currentPage: number | string;
+    totalPage: number;
+    totalCount: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    nextPage: number | null;
+    previousPage: number | null;
+  }
+}

@@ -4,9 +4,10 @@ import RestaurantList from "@/components/restaurant-list/restaurant-list.tsx";
 import {useState} from "react";
 
 
-
 const Main = () => {
     const [query, setQuery] = useState<string>("")
+    const [page, setPage] = useState(1);
+
   return (
     <>
       <PromoSlider />
@@ -21,7 +22,7 @@ const Main = () => {
           setValue={setQuery}
         />
       </div>
-      <RestaurantList query={query} />
+      <RestaurantList query={query} page={page} setPage={setPage} />
     </>
   );
 };
