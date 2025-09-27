@@ -18,7 +18,6 @@ export interface Product {
   partnerId: string;
 }
 
-
 export type PartnersResponse = {
   partners: Partner[];
   pagination: {
@@ -29,5 +28,5 @@ export type PartnersResponse = {
     hasPreviousPage: boolean;
     nextPage: number | null;
     previousPage: number | null;
-  }
-}
+  };
+};

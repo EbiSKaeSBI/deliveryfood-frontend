@@ -1,12 +1,11 @@
 import PromoSlider from "@/components/promo-slider/promo-slider.tsx";
 import Input from "@/components/ui/input/input.tsx";
 import RestaurantList from "@/components/restaurant-list/restaurant-list.tsx";
-import {useState} from "react";
-
+import { useState } from "react";
 
 const Main = () => {
-    const [query, setQuery] = useState<string>("")
-    const [page, setPage] = useState(1);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState(1);
 
   return (
     <>

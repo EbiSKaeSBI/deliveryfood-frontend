@@ -15,8 +15,9 @@ export const AuthRequest = {
       .post<AuthResponse>("auth/register", data)
       .then((response) => response.data),
   logout: async () =>
+    await api.post("auth/logout").then((response) => response.data),
+  refreshToken: async (token: string) =>
     await api
-      .post("auth/logout")
+      .post("auth/refreshToken", token)
       .then((response) => response.data),
-  refreshToken: async (token: string) => await api.post("auth/refreshToken", token).then((response) => response.data),
 };

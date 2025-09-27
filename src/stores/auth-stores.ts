@@ -35,15 +35,13 @@ export const useAuthStore = create<AuthState>()(
         try {
           const response = await AuthRequest.login(credentials);
           const isAdmin = response.user.role === "ADMIN";
-            set({
-              user: response.user,
-              isAdmin: isAdmin,
-              isAuthenticated: true,
-              isLoading: false,
-              error: null,
-            });
-
-
+          set({
+            user: response.user,
+            isAdmin: isAdmin,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
 
           localStorage.setItem("token", response.accessToken);
           toast.success(response.message || "Успешный вход в систему!");
