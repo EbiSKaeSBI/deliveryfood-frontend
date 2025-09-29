@@ -11,6 +11,7 @@ export const useRegister = () => {
     },
     onError: (error) => {
       toast.error(
+        // @ts-ignore
         error.response?.data.message || "Произошла ошибка при регистрации",
       );
     },
@@ -25,6 +26,7 @@ export const useLogin = () => {
       toast.success("Вы успешно вошли в систему");
     },
     onError: (error) => {
+      // @ts-ignore
       toast.error(error.response?.data.message || "Произошла ошибка при входе");
     },
   });

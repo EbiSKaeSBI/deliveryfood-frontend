@@ -44,7 +44,6 @@ export const useAuthStore = create<AuthState>()(
           });
 
           localStorage.setItem("token", response.accessToken);
-          toast.success(response.message || "Успешный вход в систему!");
         } catch (error) {
           set({
             isLoading: false,
@@ -67,7 +66,6 @@ export const useAuthStore = create<AuthState>()(
             error: null,
           });
           localStorage.setItem("token", response.accessToken);
-          toast.success(response.message || "Успешная регистрация!");
         } catch (error) {
           set({
             isLoading: false,

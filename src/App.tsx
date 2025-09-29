@@ -4,15 +4,27 @@ import Login from "@/app/auth/login/login.tsx";
 import Register from "@/app/auth/register/register.tsx";
 import Product from "@/app/product/product.tsx";
 import { useAuthInit } from "@/hooks/useAuthInit.ts";
+import Profile from "@/app/profile/profile.tsx";
+import { useAuthStore } from "@/stores/auth-stores.ts";
 
 function App() {
   useAuthInit();
+  const { isAuthenticated } = useAuthStore();
   return (
     <Routes>
       <Route path="/" element={<Main />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/product/:id" element={<Product />} />
+      {isAuthenticated && <Route path="/profile" element={<Profile />} />}
+      <Route
+        path="*"
+        element={
+          <p className="text-center font-bold text-2xl">
+            Страница не найдена 404
+          </p>
+        }
+      />
     </Routes>
   );
 }

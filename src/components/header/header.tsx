@@ -19,6 +19,8 @@ const Header = () => {
     enabled: isAuthenticated,
   });
 
+  console.log(data);
+
   return (
     <header className="flex items-center justify-between mb-10 container mx-auto">
       <Link to="/">

@@ -16,7 +16,11 @@ const RestaurantCard = ({ partners }: RestaurantCardProps) => {
   return (
     <Link to={`/product/${partners.id}`}>
       <div className="bg-white shadow-[0_4px_12px_rgba(0,0,0,0.05)] rounded-[7px] overflow-hidden mb-[30px] basis-[31%] no-underline mt-5">
-        <img src={partners.image} className="w-full" alt="image" />
+        <img
+          src={partners.image}
+          className="w-full max-h-[275px]"
+          alt="image"
+        />
         <div className="pt-[20px] pr-[23px]  pl-[15px] min-h-[200px] flex flex-col">
           <div className="flex items-center justify-between mb-[10px]">
             <h3 className="m-0 not-italic font-bold text-[22px]/[32px]">

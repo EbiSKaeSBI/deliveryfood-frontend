@@ -6,9 +6,9 @@ import vkLogo from "@/assets/social/vk.svg";
 
 const Footer = () => {
   return (
-    <footer className="py-[60px] mx-auto container ">
+    <footer className="py-[30px]  mx-auto container mt-auto">
       <div className="flex justify-between items-center">
-        <nav className="mb-[20px] flex items-center  gap-4  ">
+        <nav className="mb-[10px] flex items-center  gap-4 ">
           <Link to="/">
             <img src={FooterLogo} alt="Logo" />
           </Link>

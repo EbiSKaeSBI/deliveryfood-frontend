@@ -13,10 +13,17 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <Header />
-        <App />
-        <Toaster position="bottom-right" toastOptions={{ duration: 4000 }} />
-        <Footer />
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-grow">
+            <App />
+            <Toaster
+              position="bottom-right"
+              toastOptions={{ duration: 4000 }}
+            />
+          </main>
+          <Footer />
+        </div>
       </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>,
