@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Main from "@/app/main/main.tsx";
 import Login from "@/app/auth/login/login.tsx";
 import Register from "@/app/auth/register/register.tsx";
@@ -13,10 +13,21 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/product/:id" element={<Product />} />
-      {isAuthenticated && <Route path="/profile" element={<Profile />} />}
+      <Route
+        path="/login"
+        element={isAuthenticated ? <Navigate to="/" replace /> : <Login />}
+      />
+      <Route
+        path="/register"
+        element={isAuthenticated ? <Navigate to="/" replace /> : <Register />}
+      />
+      <Route
+        path="/profile"
+        element={
+          isAuthenticated ? <Profile /> : <Navigate to="/login" replace />
+        }
+      />
       <Route
         path="*"
         element={
