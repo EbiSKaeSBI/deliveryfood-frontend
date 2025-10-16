@@ -29,7 +29,8 @@ const RegisterForm = () => {
 
   const registerMutation = useRegister();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = (data, e) => {
+    e?.preventDefault();
     registerMutation.mutate(data);
   };
 

@@ -8,12 +8,10 @@ import { DeliveriesTable } from "@/components/deliveries-table/deliveries-table.
 const Profile = () => {
   const { isAuthenticated } = useAuthStore();
   const { data } = useQuery<User>({
-    queryKey: ["user"],
+    queryKey: ["user", "name"],
     queryFn: getProfile,
     enabled: isAuthenticated,
   });
-
-  console.log(data);
 
   return (
     <>

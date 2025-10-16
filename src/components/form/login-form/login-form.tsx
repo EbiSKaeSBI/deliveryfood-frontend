@@ -27,7 +27,8 @@ const LoginFrom = () => {
 
   const loginMutation = useLogin();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = (data, e) => {
+    e?.preventDefault();
     loginMutation.mutate(data);
   };
 

@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/shadcn/card.tsx";
 import { Calendar, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/shadcn/ui/button.tsx";
+import { Link } from "react-router-dom";
 
 interface ProfileHeaderProps {
   name?: string;
@@ -36,8 +37,12 @@ const ProfileHeader = ({
                 <span>{email}</span>
               </div>
               <div className="flex items-center gap-1">
-                <Phone className="size-4" />
-                <span>{phone}</span>
+                {phone && (
+                  <span className="flex items-center gap-1">
+                    <Phone className="size-4" />
+                    <span>{phone}</span>
+                  </span>
+                )}
               </div>
               <div className="flex items-center gap-1">
                 <Calendar className="size-4" />
@@ -46,7 +51,9 @@ const ProfileHeader = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <Button className="gap-2">Редактировать профиль</Button>
+            <Link to="/edit">
+              <Button className="gap-2">Редактировать профиль</Button>
+            </Link>
           </div>
         </div>
       </div>
