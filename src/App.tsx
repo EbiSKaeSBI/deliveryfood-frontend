@@ -7,6 +7,7 @@ import { useAuthInit } from "@/hooks/useAuthInit.ts";
 import Profile from "@/app/profile/profile.tsx";
 import { useAuthStore } from "@/stores/auth-stores.ts";
 import EditProfile from "@/app/edit-profile/edit-profile.tsx";
+import Cart from "@/app/cart/cart.tsx";
 
 function App() {
   useAuthInit();
@@ -29,6 +30,12 @@ function App() {
           isAuthenticated ? <Profile /> : <Navigate to="/login" replace />
         }
       />
+        <Route
+            path="/cart"
+            element={
+                isAuthenticated ? <Cart /> : <Navigate to="/login" replace />
+            }
+        />
       <Route
         path="/edit"
         element={

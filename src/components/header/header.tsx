@@ -9,17 +9,17 @@ import { useAuthStore } from "@/stores/auth-stores.ts";
 import { useQuery } from "@tanstack/react-query";
 import type { User } from "@/types/users/users.ts";
 import { getProfile } from "@/shared/api/get-profile.ts";
+import useCartStore from "@/stores/useCartStore.ts";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuthStore();
+  const  { items } = useCartStore()
 
   const { data } = useQuery<User>({
     queryKey: ["user"],
     queryFn: getProfile,
     enabled: isAuthenticated,
   });
-
-  console.log(data);
 
   return (
     <header className="flex items-center justify-between mb-10 container mx-auto">
@@ -50,11 +50,11 @@ const Header = () => {
             </Link>
             <Link to="/cart">
               <Button className="mx-[5px] hover:bg-[#1890ff] hover:text-white hover:duration-250">
-                <FaBasketShopping size={16} /> Корзина
+                <FaBasketShopping size={16} /> Корзина ({items?.length})
               </Button>
             </Link>
             <Button
-              logout={logout}
+              onClick={logout}
               className="mx-[5px] bg-[#1890ff] border-[#1890ff] text-white mr-[10px] hover:bg-white hover:border-[#d9d9d9] hover:text-[#595959] hover:duration-250"
             >
               <IoMdExit size={16} />
