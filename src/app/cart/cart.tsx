@@ -1,5 +1,5 @@
 import useCartStore from "@/stores/useCartStore.ts";
-import { Trash2, Plus, Minus, ShoppingCart } from "lucide-react";
+import {Minus, Plus, ShoppingCart, Trash2} from "lucide-react";
 import {toast} from "react-hot-toast";
 
 const Cart = () => {
