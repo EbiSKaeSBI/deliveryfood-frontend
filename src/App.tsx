@@ -30,12 +30,10 @@ function App() {
           isAuthenticated ? <Profile /> : <Navigate to="/login" replace />
         }
       />
-        <Route
-            path="/cart"
-            element={
-                isAuthenticated ? <Cart /> : <Navigate to="/login" replace />
-            }
-        />
+      <Route
+        path="/cart"
+        element={isAuthenticated ? <Cart /> : <Navigate to="/login" replace />}
+      />
       <Route
         path="/edit"
         element={

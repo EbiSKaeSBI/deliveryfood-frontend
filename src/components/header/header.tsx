@@ -13,7 +13,7 @@ import useCartStore from "@/stores/useCartStore.ts";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuthStore();
-  const  { items } = useCartStore()
+  const { items } = useCartStore();
 
   const { data } = useQuery<User>({
     queryKey: ["user"],
