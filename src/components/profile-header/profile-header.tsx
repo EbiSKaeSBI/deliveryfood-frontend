@@ -7,7 +7,7 @@ interface ProfileHeaderProps {
   name?: string;
   phone?: string;
   email?: string;
-  createAt: Date;
+  createAt?: Date;
 }
 
 const ProfileHeader = ({
@@ -16,6 +16,7 @@ const ProfileHeader = ({
   phone,
   name,
 }: ProfileHeaderProps) => {
+  // @ts-ignore
   const joinDate = new Date(createAt).toLocaleDateString("ru-RU", {
     year: "numeric",
     month: "long",
