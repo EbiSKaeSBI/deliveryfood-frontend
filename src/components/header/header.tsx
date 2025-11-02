@@ -10,10 +10,13 @@ import { useQuery } from "@tanstack/react-query";
 import type { User } from "@/types/users/users.ts";
 import { getProfile } from "@/shared/api/get-profile.ts";
 import useCartStore from "@/stores/useCartStore.ts";
+import {useAddressStore} from "@/stores/useAddressStore.ts";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuthStore();
   const { items } = useCartStore();
+  const { inputValue, setInputValue } = useAddressStore();
+
 
   const { data } = useQuery<User>({
     queryKey: ["user"],
@@ -21,7 +24,8 @@ const Header = () => {
     enabled: isAuthenticated,
   });
 
-  return (
+
+    return (
     <header className="flex items-center justify-between mb-10 container mx-auto">
       <Link to="/">
         <img src={logoDelivery} alt="Logo" />
@@ -30,6 +34,8 @@ const Header = () => {
         classNameLabel="flex-[0.8]"
         className="bg-[url(./assets/svg/home.svg)]"
         placeholder="Адрес доставки"
+        value={inputValue}
+        setValue={setInputValue}
       />
       <div className="flex items-center">
         {!isAuthenticated && (
